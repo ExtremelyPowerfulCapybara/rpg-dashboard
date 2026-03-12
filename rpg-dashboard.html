@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=1100, initial-scale=1.0">
 <title>Adventure of Meh — HUD</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
@@ -784,11 +784,27 @@ body::after {
 ═══════════════════════════════════════════ */
 @media (max-width: 900px) {
   body {
+    grid-template-columns: 220px 1fr 200px;
+    grid-template-rows: 56px 1fr 1fr;
+    grid-template-areas:
+      "topbar  topbar  topbar"
+      "stats   quests  energy"
+      "stats   daily   energy";
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
+    font-size: 11px;
+  }
+}
+
+/* Tablet portrait — stack into 2 columns */
+@media (max-width: 700px) {
+  body {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 56px auto auto auto;
     grid-template-areas:
       "topbar  topbar"
-      "energy  stats"
+      "stats   energy"
       "quests  quests"
       "daily   daily";
     overflow-y: auto;
