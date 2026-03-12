@@ -1194,11 +1194,12 @@ const NOTION_ENERGY_DB = '29da4e8816f781ffb241c6f4ecacdb4f'; // Daily Energy (1)
 const NOTION_STATS_DB  = '29da4e8816f78186a0d0d1e1de6bbeca'; // All Stats Beta
 // Notion requires a CORS proxy for browser requests.
 // We use a simple public proxy — or you can run your own.
-// Multiple CORS proxies — tries each one in order until one works
+// Your personal Cloudflare Worker proxy — always works, no rate limits
 const PROXIES = [
-  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-  url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-  url => `https://cors-anywhere.herokuapp.com/${url}`,
+  url => {
+    const path = url.replace('https://api.notion.com/v1/', '');
+    return `https://notion-proxy.adri-vazquez96.workers.dev/notion/${path}`;
+  }
 ];
 
 let notionToken = localStorage.getItem('notion_token') || '';
